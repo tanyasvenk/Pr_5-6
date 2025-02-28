@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админка</title>
+    <script defer src="admin.js"></script>
+    <style>
+        .product-card {
+          border: 1px solid #ccc;
+          padding: 20px;
+          margin: 20px;
+          border-radius: 5px;
+          max-width: 300px;
+        }
+      </style>
+</head>
+<body>
+    <h1>Админка: Управление товарами</h1>
+
+    <h2>Добавить товар</h2>
+    <input type="text" id="name" placeholder="Название">
+    <input type="number" id="price" placeholder="Цена">
+    <input type="text" id="description" placeholder="Описание">
+    <input type="text" id="categories" placeholder="Категории">
+    <button onclick="addProduct()">Добавить</button>
+
+    <h2>Редактировать товар</h2>
+    <input type="number" id="edit-id" placeholder="ID товара">
+    <input type="text" id="edit-name" placeholder="Новое название">
+    <input type="number" id="edit-price" placeholder="Новая цена">
+    <input type="text" id="edit-description" placeholder="Новое описание">
+    <input type="text" id="edit-categories" placeholder="Новые категории">
+    <button onclick="editProduct()">Обновить</button>
+
+    <h2>Удалить товар</h2>
+    <input type="number" id="delete-id" placeholder="ID товара">
+    <button onclick="deleteProduct()">Удалить</button>
+
+    <h1>Каталог товаров</h1>
+    <div id="products"></div>
+</body>
+</html>

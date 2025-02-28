@@ -1,0 +1,105 @@
+openapi: 3.0.0
+info:
+  title: API интернет-магазина
+  description: Документация API для управления товарами в интернет-магазине
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: Локальный сервер разработки
+
+paths:
+  /api/products:
+    get:
+      summary: Получить список всех товаров
+      operationId: getProducts
+      responses:
+        "200":
+          description: Успешный ответ со списком товаров
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Product"
+        "500":
+          description: Ошибка сервера
+
+    post:
+      summary: Добавить новый товар
+      operationId: createProduct
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Product"
+      responses:
+        "201":
+          description: Товар успешно добавлен
+        "400":
+          description: Неверный запрос
+        "500":
+          description: Ошибка сервера
+
+  /api/products/{id}:
+    put:
+      summary: Обновить данные товара
+      operationId: updateProduct
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Product"
+      responses:
+        "200":
+          description: Товар обновлен
+        "404":
+          description: Товар не найден
+        "500":
+          description: Ошибка сервера
+
+    delete:
+      summary: Удалить товар
+      operationId: deleteProduct
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Товар удален
+        "404":
+          description: Товар не найден
+        "500":
+          description: Ошибка сервера
+
+components:
+  schemas:
+    Product:
+      type: object
+      required:
+        - name
+        - price
+      properties:
+        id:
+          type: integer
+          example: 123
+        name:
+          type: string
+          example: "Ноутбук Lenovo"
+        price:
+          type: number
+          format: float
+          example: 45000.99
+        description:
+          type: string
+          example: "Игровой ноутбук с процессором Intel i7"
